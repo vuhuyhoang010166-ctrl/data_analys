@@ -1,9 +1,31 @@
 import streamlit as st
 import pandas as pd
-# --- LƯU Ý: Đảm bảo bạn đã cài đặt google-generativeai ---
-# --- pip install google-generativeai ---
-import google.generativeai as genai
-from google.api_core import exceptions as google_exceptions
+
+# --- KIỂM TRA VÀ HƯỚNG DẪN CÀI ĐẶT THƯ VIỆN ---
+try:
+    # --- LƯU Ý: Đảm bảo bạn đã cài đặt google-generativeai ---
+    # --- pip install google-generativeai ---
+    import google.generativeai as genai
+    from google.api_core import exceptions as google_exceptions
+except ImportError:
+    st.error(
+        """
+        **LỖI: THƯ VIỆN `google-generativeai` BỊ THIẾU**
+
+        Ứng dụng này cần thư viện của Google để hoạt động. Vui lòng tạo một file tên là `requirements.txt` trong thư mục dự án của bạn và thêm vào đó nội dung sau:
+
+        ```
+        streamlit
+        pandas
+        openpyxl
+        google-generativeai
+        ```
+
+        Sau khi lưu file `requirements.txt`, hãy khởi động lại hoặc deploy lại ứng dụng của bạn.
+        """
+    )
+    st.stop()
+
 
 # --- Cấu hình Trang Streamlit ---
 st.set_page_config(
@@ -235,4 +257,6 @@ if uploaded_file is not None:
 
 else:
     st.info("Vui lòng tải lên file Excel để bắt đầu phân tích.")
+
+
 
